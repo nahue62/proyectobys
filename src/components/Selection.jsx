@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
 
+
 export const rol = [
   { label: "Analista Tester Funcional", value: "Analista Tester Funcional" },
   { label: "Administrativo", value: "Administrativo" },
@@ -39,6 +40,7 @@ const contacto = [
   { label: "EducationIT", value: "EducationIT" },
 ];
 
+/*
 export function SelecSkills() {
   const [selectedSupplier, setSelectedSupplier] = useState();
 
@@ -57,6 +59,19 @@ export function SelecSkills() {
       />
     </div>
   );
+}
+*/
+
+export function SelecSkills(){
+  return (
+  <Select
+  isMulti
+  name="skills"
+  options={skills}
+  className="basic-multi-select"
+  classNamePrefix="select"
+  placeholder="Skills"
+/>)
 }
 
 export function SelecRol() {
