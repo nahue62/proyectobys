@@ -17,10 +17,18 @@ import { personaSchema } from "../../schemas";
 import Contexto from "../../context/Contexto";
 import { useContext, useState } from "react";
 
+import Modal from "../Modal";
+
 const CrearPersona = () => {
   const regExp = /^[a-zA-ZÀ-ÿ\s]{1,250}$/;
   const regExpLinkedin = /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-z0-9_-]+\/?$/;
   const [nombre, setNombre] = useState("");
+  const [active, setActive] = useState(false);
+  
+
+  const toggle = () => {
+    setActive(!active);
+  }
 
   const llenarNombre = (e) => {
     //setNombre(e.target.value);
@@ -230,8 +238,17 @@ const CrearPersona = () => {
             </div>
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faGear} />
+              <button type='button' onClick={toggle}>Skills</button>
+              <Modal active={active} toggle={toggle}>
+                <SelecSkills />
+                </Modal> 
+            </div>
+            {/*
+            <div className="flex justify-start items-center">
+              <FontAwesomeIcon className="mr-2" icon={faGear} />
               <SelecSkills />
             </div>
+                */}
           </div>
         </div>
         <div className="flex flex-col justify-center items-center m-10">
