@@ -1,7 +1,7 @@
 
 import { useContext, useState } from "react";
-import logoGyl from "../assets/img/logoGyl.png";
-import "./login.css";
+import logoGyl from "../../assets/img/logoGyl.png";
+import "../../css/login.css";
 import { useFormik } from "formik";
 import { basicSchema } from "../../schemas";
 import {
@@ -11,7 +11,7 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
-import Contexto from "./context/Contexto";
+import Contexto from "../../context/Contexto";
 
 function Login() {
   const { setLogeado } = useContext(Contexto);

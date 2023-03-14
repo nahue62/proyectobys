@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Privado from "./Privado";
-import Login from "../../Login";
+import Login from "../../../Pages/pageLogin/Login";
 import RutasPublicas from "./RutasPublicas";
 import RutasPrivadas from "./RutasPrivadas";
 const Publico = () => {
