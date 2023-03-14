@@ -195,6 +195,18 @@ export function SelecRol() {
   );
 }
 
+export function SelecRolMulti() {
+  return (
+    <Select
+    isMulti
+    name="Rol"
+    options={rol}
+    className="basic-multi-select"
+    classNamePrefix="select"
+    placeholder="Rol"
+  />)
+}
+
 export function SelecSeniority() {
   const [selectedSupplier, setSelectedSupplier] = useState();
 
@@ -212,6 +224,19 @@ export function SelecSeniority() {
       />
     </div>
   );
+}
+
+
+export function SelecSeniorityMulti() {
+  return (
+    <Select
+    isMulti
+    name="Seniority"
+    options={senior}
+    className="basic-multi-select"
+    classNamePrefix="select"
+    placeholder="Seniority"
+  />)
 }
 
 export function SelecContact() {
