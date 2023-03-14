@@ -1,14 +1,29 @@
 import {
   faCircleCheck,
+  faDollar,
+  faDollarSign,
   faFileSignature,
   faGear,
+  faIndustry,
   faLightbulb,
+  faMailBulk,
+  faMailForward,
+  faMailReply,
   faMedal,
+  faMoneyBill,
+  faMoneyBill1,
+  faMoneyBill1Wave,
+  faMoneyBillTransfer,
+  faMoneyBillTrendUp,
+  faMoneyBillWheat,
+  faMoneyCheck,
+  faMoneyCheckDollar,
+  faPhone,
   faUser,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faLinkedin, faMailchimp } from "@fortawesome/free-brands-svg-icons";
 import { NavLink } from "react-router-dom";
 
 import {SelecSkills,SelecRol,SelecSeniority,SelecContact,} from "../Selection";
@@ -100,6 +115,10 @@ const CrearPersona = () => {
       fuenteContacto: "",
       recruiter: "",
       skill: "",
+      telefono: "",
+      mail: "",
+      industria: "",
+      remuneracion: "",
     },
     validationSchema: personaSchema,
     //onSubmit,
@@ -251,6 +270,115 @@ const CrearPersona = () => {
                 */}
           </div>
         </div>
+
+        
+      {/*-------- */}     
+
+
+
+      <div className="flex h-1/2">
+          {/*ABAJO IZ*/}
+          <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
+            <div className="flex justify-start items-center">
+              <div>
+                <FontAwesomeIcon className="mr-2" icon={faPhone} />
+              </div>
+              <div>
+                <input
+                  id="telefono"
+                  type="text"
+                  placeholder="Teléfono"
+                  className={
+                    errors.telefono && touched.telefono
+                      ? "border-b border-[#F40505]"
+                      : "border-b border-[#D6E4EC]"
+                  }
+                  value={values.telefono}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.telefono && touched.telefono && (
+                  <p className="text-red-600 text-xs ">{errors.telefono}</p>
+                )}
+              </div>
+            </div>
+            <div>
+                <FontAwesomeIcon className="mr-2" icon={faMailBulk} />
+              </div>
+              <div>
+                <input
+                  id="mail"
+                  type="text"
+                  placeholder="Mail"
+                  className={
+                    errors.mail && touched.mail
+                      ? "border-b border-[#F40505]"
+                      : "border-b border-[#D6E4EC]"
+                  }
+                  value={values.mail}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.mail && touched.mail && (
+                  <p className="text-red-600 text-xs ">{errors.mail}</p>
+                )}
+              </div>
+          </div>
+          {/*ABAJO DER*/}
+          <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
+            <div className="flex justify-start items-center">
+              <div>
+                <FontAwesomeIcon className="mr-2" icon={faIndustry} />
+              </div>
+              <div>
+                <input
+                  id="industria"
+                  type="text"
+                  placeholder="Industria"
+                  className={
+                    errors.industria && touched.industria
+                      ? "border-b border-[#F40505]"
+                      : "border-b border-[#D6E4EC]"
+                  }
+                  value={values.industria}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.industria && touched.industria && (
+                  <p className="text-red-600 text-xs ">{errors.industria}</p>
+                )}
+              </div>
+            </div>
+            <div className="flex justify-start items-center">
+              <FontAwesomeIcon className="mr-2" icon={faDollarSign} />
+            </div>
+            <div>
+                <input
+                  id="remuneracion"
+                  type="text"
+                  placeholder="Remuneración"
+                  className={
+                    errors.remuneracion && touched.remuneracion
+                      ? "border-b border-[#F40505]"
+                      : "border-b border-[#D6E4EC]"
+                  }
+                  value={values.remuneracion}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.remuneracion && touched.remuneracion && (
+                  <p className="text-red-600 text-xs ">{errors.remuneracion}</p>
+                )}
+              </div>
+          </div>
+        </div>
+
+
+
+
+      {/* ---------*/}
+
+
         <div className="flex flex-col justify-center items-center m-10">
           {/*
           <input
