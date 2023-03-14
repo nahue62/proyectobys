@@ -1,14 +1,14 @@
 import React from "react";
-import CrearPersona from "../../CrearPersona";
-import EncontrarPersona from "../../EncontrarPersona";
+import CrearPersona from "../../Crear/CrearPersona";
+import EncontrarPersona from "../../Encontrar/EncontrarPersona";
 import ListarPersona from "../../ListarPersona";
-import CrearBusqueda from "../../CrearBusqueda";
-import EncontrarBusqueda from "../../EncontrarBusqueda";
-import CrearEntrevista from "../../CrearEntrevista";
-import EncontrarEntrevista from "../../EncontrarEntrevista";
+import CrearBusqueda from "../../Crear/CrearBusqueda";
+import EncontrarBusqueda from "../../Encontrar/EncontrarBusqueda";
+import CrearEntrevista from "../../Crear/CrearEntrevista";
+import EncontrarEntrevista from "../../Encontrar/EncontrarEntrevista";
 import Eventos from "../../Eventos";
-import Menu from "../../Menu";
-import CerrarSesion from "../../CerrarSesion";
+import Menu from "../../../Pages/pageMenu/Menu";
+import CerrarSesion from "../../../Pages/pageMenu/CerrarSesion";
 import Navegador from "../../Navegador";
 import { Navigate, Route, Routes } from "react-router-dom";
 const Privado = () => {

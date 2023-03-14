@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logoGyl from "../assets/img/logoGyl.png";
-import Contexto from "./context/Contexto";
+import Contexto from "../context/Contexto";
 
 const Navegador = () => {
   const navegacion = useNavigate();
