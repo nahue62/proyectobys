@@ -167,9 +167,10 @@ export function SelecSkills() {
 }
 */
 
-export function SelecSkills(){
+export function SelecSkills({onModalChange}){
   return (
   <Select
+  onChange={onModalChange}
   isMulti
   name="skills"
   options={skills}

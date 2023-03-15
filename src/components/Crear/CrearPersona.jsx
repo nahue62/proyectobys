@@ -1,23 +1,12 @@
 import {
   faCircleCheck,
-  faDollar,
   faDollarSign,
   faFileSignature,
   faGear,
   faIndustry,
   faLightbulb,
   faMailBulk,
-  faMailForward,
-  faMailReply,
   faMedal,
-  faMoneyBill,
-  faMoneyBill1,
-  faMoneyBill1Wave,
-  faMoneyBillTransfer,
-  faMoneyBillTrendUp,
-  faMoneyBillWheat,
-  faMoneyCheck,
-  faMoneyCheckDollar,
   faPhone,
   faUser,
   faUserGroup,
@@ -25,56 +14,54 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faMailchimp } from "@fortawesome/free-brands-svg-icons";
 import { NavLink } from "react-router-dom";
-
-import {SelecSkills,SelecRol,SelecSeniority,SelecContact,} from "../Selection";
+import {
+  SelecSkills,
+  SelecRol,
+  SelecSeniority,
+  SelecContact,
+} from "../Selection";
 import { useFormik } from "formik";
 import { personaSchema } from "../../schemas";
 import Contexto from "../../context/Contexto";
 import { useContext, useState } from "react";
-
 import Modal from "../Modal";
 
 const CrearPersona = () => {
+  /*
   const regExp = /^[a-zA-ZÀ-ÿ\s]{1,250}$/;
-  const regExpLinkedin = /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-z0-9_-]+\/?$/;
-  const [nombre, setNombre] = useState("");
+  const regExpLinkedin =
+    /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-z0-9_-]+\/?$/;
+  */
   const [active, setActive] = useState(false);
-  
+  const [skills, setSkills] = useState([]);
 
+  // MODAL
   const toggle = () => {
     setActive(!active);
-  }
-
-  const llenarNombre = (e) => {
-    //setNombre(e.target.value);
   };
 
-  const comprobarNombre = () => {};
+  const onModalChange = (e) => {
+    setSkills(e);
+  };
 
   const contexto = useContext(Contexto);
   const [empleado, setempleado] = useState({
     nombre: "",
     apellido: "",
+    rol: "",
+    seniority: "",
     linkedin: "",
+    fuente: "",
+    recruiter: "",
+    skills: []
   });
-  //console.log(contexto.empleados);
 
-  //METODO PARA GUARDAR LOS DATOS DE PERSONA EN EL ARRAY
-  /* const pruebaSubmit = (e) => {
-    e.preventDefault();
-    if(regExp.test(values.nombre) && regExp.test(values.apellido) &regExpLinkedin.test(values.linkedin)){
-      console.log("validado")
-    }else{
-      console.log("no validado")
-    }
-  };
-*/
   const pruebaSubmit = (e) => {
     e.preventDefault();
     contexto.empleados.forEach((e) => {
       console.log(e);
     });
-    console.log(typeof nombre);
+    console.log(skills);
     console.log(errors);
     console.log(values.nombre);
     if (
@@ -83,15 +70,22 @@ const CrearPersona = () => {
     ) {
       alert("Todos los campos están vacíos");
       return;
-    } 
-    if(empleado.nombre)
-    setempleado({
-      nombre: values.nombre,
-      apellido: values.apellido,
-      linkedin: values.linkedin,
-    });
+    }
+    if (empleado.nombre)
+      setempleado({
+        nombre: values.nombre,
+        apellido: values.apellido,
+        linkedin: values.linkedin,
+      });
     console.log("Empleado:" + empleado);
-    contexto.empleados = [...contexto.empleados, {nombre: values.nombre, apellido: values.apellido, linkedin: values.linkedin}];
+    contexto.empleados = [
+      ...contexto.empleados,
+      {
+        nombre: values.nombre,
+        apellido: values.apellido,
+        linkedin: values.linkedin,
+      },
+    ];
     contexto.empleados.forEach((e) => {
       console.log(e);
     });
@@ -114,7 +108,7 @@ const CrearPersona = () => {
       linkedin: "",
       fuenteContacto: "",
       recruiter: "",
-      skill: "",
+      skill: [],
       telefono: "",
       mail: "",
       industria: "",
@@ -129,7 +123,10 @@ const CrearPersona = () => {
       <h1 className="text-3xl mt-20 mb-10">Crear Persona</h1>
       <h3 className="text-[#117BB7]">Información de contacto</h3>
       {/*FORM*/}
-      <form className="bg-white h-1/2 w-3/4 self-center m-10" onSubmit={pruebaSubmit}>
+      <form
+        className="bg-white h-1/2 w-3/4 self-center m-10"
+        onSubmit={pruebaSubmit}
+      >
         {/*ARRIBA*/}
         <div className="flex h-1/2">
           {/*ARRIBA IZ*/}
@@ -186,7 +183,7 @@ const CrearPersona = () => {
           <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faLightbulb} />
-              <SelecRol/>
+              <SelecRol />
               {errors.selection && touched.selection && (
                 <p className="text-red-600 text-xs ">{errors.selection}</p>
               )}
@@ -257,26 +254,19 @@ const CrearPersona = () => {
             </div>
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faGear} />
-              <button type='button' onClick={toggle}>Skills</button>
+              <button type="button" onClick={toggle}>
+                Skills
+              </button>
               <Modal active={active} toggle={toggle}>
-                <SelecSkills />
-                </Modal> 
+                <SelecSkills onModalChange={onModalChange} />
+              </Modal>
             </div>
-            {/*
-            <div className="flex justify-start items-center">
-              <FontAwesomeIcon className="mr-2" icon={faGear} />
-              <SelecSkills />
-            </div>
-                */}
           </div>
         </div>
 
-        
-      {/*-------- */}     
+        {/*-------- */}
 
-
-
-      <div className="flex h-1/2">
+        <div className="flex h-1/2">
           {/*ABAJO IZ*/}
           <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
             <div className="flex justify-start items-center">
@@ -303,26 +293,26 @@ const CrearPersona = () => {
               </div>
             </div>
             <div>
-                <FontAwesomeIcon className="mr-2" icon={faMailBulk} />
-              </div>
-              <div>
-                <input
-                  id="mail"
-                  type="text"
-                  placeholder="Mail"
-                  className={
-                    errors.mail && touched.mail
-                      ? "border-b border-[#F40505]"
-                      : "border-b border-[#D6E4EC]"
-                  }
-                  value={values.mail}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.mail && touched.mail && (
-                  <p className="text-red-600 text-xs ">{errors.mail}</p>
-                )}
-              </div>
+              <FontAwesomeIcon className="mr-2" icon={faMailBulk} />
+            </div>
+            <div>
+              <input
+                id="mail"
+                type="text"
+                placeholder="Mail"
+                className={
+                  errors.mail && touched.mail
+                    ? "border-b border-[#F40505]"
+                    : "border-b border-[#D6E4EC]"
+                }
+                value={values.mail}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errors.mail && touched.mail && (
+                <p className="text-red-600 text-xs ">{errors.mail}</p>
+              )}
+            </div>
           </div>
           {/*ABAJO DER*/}
           <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
@@ -353,31 +343,27 @@ const CrearPersona = () => {
               <FontAwesomeIcon className="mr-2" icon={faDollarSign} />
             </div>
             <div>
-                <input
-                  id="remuneracion"
-                  type="text"
-                  placeholder="Remuneración"
-                  className={
-                    errors.remuneracion && touched.remuneracion
-                      ? "border-b border-[#F40505]"
-                      : "border-b border-[#D6E4EC]"
-                  }
-                  value={values.remuneracion}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.remuneracion && touched.remuneracion && (
-                  <p className="text-red-600 text-xs ">{errors.remuneracion}</p>
-                )}
-              </div>
+              <input
+                id="remuneracion"
+                type="text"
+                placeholder="Remuneración"
+                className={
+                  errors.remuneracion && touched.remuneracion
+                    ? "border-b border-[#F40505]"
+                    : "border-b border-[#D6E4EC]"
+                }
+                value={values.remuneracion}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errors.remuneracion && touched.remuneracion && (
+                <p className="text-red-600 text-xs ">{errors.remuneracion}</p>
+              )}
+            </div>
           </div>
         </div>
 
-
-
-
-      {/* ---------*/}
-
+        {/* ---------*/}
 
         <div className="flex flex-col justify-center items-center m-10">
           {/*
