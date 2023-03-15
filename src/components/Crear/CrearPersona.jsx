@@ -36,6 +36,19 @@ const CrearPersona = () => {
     setSkills(e);
   };
 
+
+  //Fect verbo POST guardar una persona
+  const addPersons =(data)=>{
+    const requesInit = {
+     method: 'POST',
+     headers: {'Content-Type': 'application/json'},
+     body: JSON.stringify(data)
+   }
+   fetch('http://localhost:8080/bs/person/create', requesInit)
+   .then(res => res.json())
+ };
+
+
   const contexto = useContext(Contexto);
   const [persona, setPersona] = useState({
     nameComplete: "",
@@ -49,48 +62,22 @@ const CrearPersona = () => {
 
   const pruebaSubmit = (e) => {
     e.preventDefault();
-
-    /*
-    contexto.empleados.forEach((e) => {
-      console.log(e);
-    });
-    */
-
-    console.log(errors.nameComplete);
-    console.log(errors.linkedin);
-    console.log(values.nameComplete);
-    if (
-      errors.nameComplete == undefined &&
-      errors.linkedin == undefined &&
-      (values.nameComplete != "" || values.linkedin != "")
-    ) {
-      alert("TA TO BIEEEN");
-      setPersona({
-        nameComplete: values.nameComplete,
+    if (errors.nameComplete === undefined && errors.linkedin === undefined && (values.nameComplete !== "" || values.linkedin !== "") ){
+       setPersona({
+        nameComplete : values.nameComplete,
         linkedin: values.linkedin,
-      });
-      // ACA VA EL ENVIO AL BACK
-
-      return;
+       })
+   
     } else {
-      alert("TA TOO MAL");
+          alert("todo mal")
     }
-
-    /*
-    contexto.empleados = [
-      ...contexto.empleados,
-      {
-        nameComplete: values.nameComplete,
-        apellido: values.apellido,
-        linkedin: values.linkedin,
-      },
-    ];
-    contexto.empleados.forEach((e) => {
-      console.log(e);
-    });
-    */
   };
 
+  //llamo funcion y le paso una persona que ingresan en los input.
+   addPersons(persona);
+ 
+
+  
   const {
     handleBlur,
     handleChange,
