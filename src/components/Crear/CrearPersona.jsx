@@ -11,6 +11,7 @@ import {
   faUser,
   faUserGroup,
   faIdCard,
+  faAddressCard
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faMailchimp } from "@fortawesome/free-brands-svg-icons";
@@ -36,7 +37,7 @@ const CrearPersona = () => {
   };
 
   const contexto = useContext(Contexto);
-  const [empleado, setempleado] = useState({
+  const [persona, setPersona] = useState({
     nameComplete: "",
     rol: "",
     seniorityGeneral: "",
@@ -48,27 +49,25 @@ const CrearPersona = () => {
 
   const pruebaSubmit = (e) => {
     e.preventDefault();
+
+    /*
     contexto.empleados.forEach((e) => {
       console.log(e);
     });
-    console.log(skills);
+    */
+
     console.log(errors);
     if (
       (values.nameComplete == "" ||
-        values.apellido == "" ||
         values.linkedin == "") &&
       errors[0] == undefined
     ) {
       alert("Todos los campos están vacíos");
       return;
     }
-    if (empleado.nombre)
-      setempleado({
-        nameComplete: values.nameComplete,
-        apellido: values.apellido,
-        linkedin: values.linkedin,
-      });
-    console.log("Empleado:" + empleado);
+
+
+    /*
     contexto.empleados = [
       ...contexto.empleados,
       {
@@ -80,6 +79,7 @@ const CrearPersona = () => {
     contexto.empleados.forEach((e) => {
       console.log(e);
     });
+    */
   };
 
   const {
@@ -151,7 +151,7 @@ const CrearPersona = () => {
           <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faLightbulb} />
-              <SelecRol value={values.rol} />
+              <SelecRol />
               {errors.selection && touched.selection && (
                 <p className="text-red-600 text-xs ">{errors.selection}</p>
               )}
@@ -159,7 +159,7 @@ const CrearPersona = () => {
 
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faMedal} />
-              <SelecSeniority value={values.seniorityGeneral} />
+              <SelecSeniority />
             </div>
           </div>
         </div>
@@ -192,7 +192,7 @@ const CrearPersona = () => {
             </div>
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faUserGroup} />
-              <Sources value={values.sources} />
+              <Sources />
             </div>
           </div>
           {/*ABAJO DER*/}
@@ -227,7 +227,6 @@ const CrearPersona = () => {
               </button>
               <Modal active={active} toggle={toggle}>
                 <SelecSkills
-                  value={values.skill}
                   onModalChange={onModalChange}
                 />
               </Modal>
@@ -361,7 +360,7 @@ const CrearPersona = () => {
             </div>
           </div>
           <div>
-          <FontAwesomeIcon className="mr-2" icon={faIdCard} />
+            <FontAwesomeIcon className="mr-2" icon={faAddressCard} />
           </div>
           <div>
             <input
