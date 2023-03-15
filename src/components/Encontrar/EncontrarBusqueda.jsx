@@ -7,9 +7,13 @@ import {
   faUser,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { NavLink } from "react-router-dom";
+
+import { SelecRolMulti, SelecSeniorityMulti, SelecSkills } from "../Selection";
+
 const EncontrarBusqueda = () => {
   return (
     <div className="flex flex-col justify-start items-center h-screen">
@@ -65,22 +69,17 @@ const EncontrarBusqueda = () => {
               />
             </div>
           </div>
-        </div>
-        <div className="flex flex-col justify-center items-center m-10">
-          <div className="flex justify-around items-center  w-1/2">
-            <div className="flex justify-start items-center mt-5 mb-2">
+
+          <div className="flex justify-around items-center border w-1/2">
+            <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faGear} />
-              <label for="opciones" className="mr-1">Skills: </label>
-              <select id="opciones" className="border-lg bg-[#F7FEFE]">
-              <option value="" disabled></option>
-                <option value="opcion1">Opción 1</option>
-                <option value="opcion2">Opción 2</option>
-                <option value="opcion3">Opción 3</option>
-                <option value="opcion4">Opción 4</option>
-                <option value="opcion5">Opción 5</option>
-              </select>
+              <SelecSkills />
             </div>
           </div>
+          
+        </div>
+        <div className="flex flex-col justify-center items-center m-10">
+        
           <input
             type="submit"
             value="Enviar"

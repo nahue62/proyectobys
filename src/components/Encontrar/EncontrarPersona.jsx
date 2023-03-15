@@ -48,7 +48,7 @@ const EncontrarPersona = () => {
               <FontAwesomeIcon className="mr-2" icon={faUser} />
               <input
                 type="text"
-                placeholder="Nombre y apellido"
+                placeholder="Nombre Completo"
                 className="border-b border-[#D6E4EC]"
               />
             </div>
