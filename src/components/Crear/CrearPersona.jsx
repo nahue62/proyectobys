@@ -56,14 +56,24 @@ const CrearPersona = () => {
     });
     */
 
-    console.log(errors);
+    console.log(errors.nameComplete);
+    console.log(errors.linkedin);
+    console.log(values.nameComplete)
     if (
-      (values.nameComplete == "" ||
-        values.linkedin == "") &&
-      errors[0] == undefined
-    ) {
-      alert("Todos los campos están vacíos");
+      (errors.nameComplete == undefined &&
+        errors.linkedin== undefined) && (values.nameComplete != "" ||
+          values.linkedin!= "")
+    ){
+      alert("TA TO BIEEEN");
+      setPersona({
+        nameComplete: values.nameComplete,
+        linkedin: values.linkedin
+      })
+      // ACA VA EL ENVIO AL BACK
+
       return;
+    }else{
+      alert("TA TOO MAL");
     }
 
 

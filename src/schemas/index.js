@@ -37,8 +37,7 @@ export const personaSchema = yup.object().shape({
     .required("Ingrese un nombre."),
   email: yup
     .string()
-    .email("Por favor ingrese un email válido.")
-    .required("Por favor ingrese un mail."),
+    .email("Por favor ingrese un email válido."),
   linkedin: yup
     .string()
     .url("El formato de la url no es válido.")
