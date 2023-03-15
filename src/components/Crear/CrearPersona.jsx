@@ -11,7 +11,7 @@ import {
   faUser,
   faUserGroup,
   faIdCard,
-  faAddressCard
+  faAddressCard,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faMailchimp } from "@fortawesome/free-brands-svg-icons";
@@ -58,24 +58,23 @@ const CrearPersona = () => {
 
     console.log(errors.nameComplete);
     console.log(errors.linkedin);
-    console.log(values.nameComplete)
+    console.log(values.nameComplete);
     if (
-      (errors.nameComplete == undefined &&
-        errors.linkedin== undefined) && (values.nameComplete != "" ||
-          values.linkedin!= "")
-    ){
+      errors.nameComplete == undefined &&
+      errors.linkedin == undefined &&
+      (values.nameComplete != "" || values.linkedin != "")
+    ) {
       alert("TA TO BIEEEN");
       setPersona({
         nameComplete: values.nameComplete,
-        linkedin: values.linkedin
-      })
+        linkedin: values.linkedin,
+      });
       // ACA VA EL ENVIO AL BACK
 
       return;
-    }else{
+    } else {
       alert("TA TOO MAL");
     }
-
 
     /*
     contexto.empleados = [
@@ -236,9 +235,7 @@ const CrearPersona = () => {
                 Skills
               </button>
               <Modal active={active} toggle={toggle}>
-                <SelecSkills
-                  onModalChange={onModalChange}
-                />
+                <SelecSkills onModalChange={onModalChange} />
               </Modal>
             </div>
           </div>
@@ -272,26 +269,28 @@ const CrearPersona = () => {
                 )}
               </div>
             </div>
-            <div>
-              <FontAwesomeIcon className="mr-2" icon={faMailBulk} />
-            </div>
-            <div>
-              <input
-                id="email"
-                type="text"
-                placeholder="Mail"
-                className={
-                  errors.email && touched.email
-                    ? "border-b border-[#F40505]"
-                    : "border-b border-[#D6E4EC]"
-                }
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.email && touched.email && (
-                <p className="text-red-600 text-xs ">{errors.email}</p>
-              )}
+            <div className="flex justify-start items-center">
+              <div>
+                <FontAwesomeIcon className="mr-2" icon={faMailBulk} />
+              </div>
+              <div>
+                <input
+                  id="email"
+                  type="text"
+                  placeholder="Mail"
+                  className={
+                    errors.email && touched.email
+                      ? "border-b border-[#F40505]"
+                      : "border-b border-[#D6E4EC]"
+                  }
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.email && touched.email && (
+                  <p className="text-red-600 text-xs ">{errors.email}</p>
+                )}
+              </div>
             </div>
           </div>
           {/*ABAJO DER*/}
@@ -321,74 +320,77 @@ const CrearPersona = () => {
             </div>
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faDollarSign} />
-            </div>
-            <div>
-              <input
-                id="remuneration"
-                type="text"
-                placeholder="Remuneración"
-                className={
-                  errors.remuneration && touched.remuneration
-                    ? "border-b border-[#F40505]"
-                    : "border-b border-[#D6E4EC]"
-                }
-                value={values.remuneration}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.remuneration && touched.remuneration && (
-                <p className="text-red-600 text-xs ">{errors.remuneration}</p>
-              )}
+              <div>
+                <input
+                  id="remuneration"
+                  type="text"
+                  placeholder="Remuneración"
+                  className={
+                    errors.remuneration && touched.remuneration
+                      ? "border-b border-[#F40505]"
+                      : "border-b border-[#D6E4EC]"
+                  }
+                  value={values.remuneration}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.remuneration && touched.remuneration && (
+                  <p className="text-red-600 text-xs ">{errors.remuneration}</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
         {/* ---------*/}
-
-        <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
-          <div className="flex justify-start items-center">
-            <div>
-              <FontAwesomeIcon className="mr-2" icon={faIdCard} />
+        <div className="flex h-1/2">
+          <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
+            <div className="flex justify-start items-center">
+              <div>
+                <FontAwesomeIcon className="mr-2" icon={faIdCard} />
+              </div>
+              <div>
+                <input
+                  id="dni"
+                  type="text"
+                  placeholder="Dni"
+                  className={
+                    errors.dni && touched.dni
+                      ? "border-b border-[#F40505]"
+                      : "border-b border-[#D6E4EC]"
+                  }
+                  value={values.dni}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.dni && touched.dni && (
+                  <p className="text-red-600 text-xs ">{errors.dni}</p>
+                )}
+              </div>
             </div>
-            <div>
-              <input
-                id="dni"
-                type="text"
-                placeholder="Dni"
-                className={
-                  errors.dni && touched.dni
-                    ? "border-b border-[#F40505]"
-                    : "border-b border-[#D6E4EC]"
-                }
-                value={values.dni}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.dni && touched.dni && (
-                <p className="text-red-600 text-xs ">{errors.dni}</p>
-              )}
+            <div className="flex justify-start items-center">
+              <div>
+                <FontAwesomeIcon className="mr-2" icon={faAddressCard} />
+              </div>
+              <div>
+                <input
+                  id="cuil"
+                  type="text"
+                  placeholder="Cuil"
+                  className={
+                    errors.cuil && touched.cuil
+                      ? "border-b border-[#F40505]"
+                      : "border-b border-[#D6E4EC]"
+                  }
+                  value={values.cuil}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.cuil && touched.cuil && (
+                  <p className="text-red-600 text-xs ">{errors.cuil}</p>
+                )}
+              </div>
             </div>
-          </div>
-          <div>
-            <FontAwesomeIcon className="mr-2" icon={faAddressCard} />
-          </div>
-          <div>
-            <input
-              id="cuil"
-              type="text"
-              placeholder="Cuil"
-              className={
-                errors.cuil && touched.cuil
-                  ? "border-b border-[#F40505]"
-                  : "border-b border-[#D6E4EC]"
-              }
-              value={values.cuil}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errors.cuil && touched.cuil && (
-              <p className="text-red-600 text-xs ">{errors.cuil}</p>
-            )}
           </div>
         </div>
 
