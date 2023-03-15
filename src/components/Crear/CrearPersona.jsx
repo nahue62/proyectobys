@@ -10,16 +10,12 @@ import {
   faPhone,
   faUser,
   faUserGroup,
+  faIdCard,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faMailchimp } from "@fortawesome/free-brands-svg-icons";
 import { NavLink } from "react-router-dom";
-import {
-  SelecSkills,
-  SelecRol,
-  SelecSeniority,
-  SelecContact,
-} from "../Selection";
+import { SelecSkills, SelecRol, SelecSeniority, Sources } from "../Selection";
 import { useFormik } from "formik";
 import { personaSchema } from "../../schemas";
 import Contexto from "../../context/Contexto";
@@ -27,11 +23,6 @@ import { useContext, useState } from "react";
 import Modal from "../Modal";
 
 const CrearPersona = () => {
-  /*
-  const regExp = /^[a-zA-ZÀ-ÿ\s]{1,250}$/;
-  const regExpLinkedin =
-    /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-z0-9_-]+\/?$/;
-  */
   const [active, setActive] = useState(false);
   const [skills, setSkills] = useState([]);
 
@@ -46,14 +37,13 @@ const CrearPersona = () => {
 
   const contexto = useContext(Contexto);
   const [empleado, setempleado] = useState({
-    nombre: "",
-    apellido: "",
+    nameComplete: "",
     rol: "",
-    seniority: "",
+    seniorityGeneral: "",
     linkedin: "",
-    fuente: "",
+    sources: "",
     recruiter: "",
-    skills: []
+    skills: [],
   });
 
   const pruebaSubmit = (e) => {
@@ -63,9 +53,10 @@ const CrearPersona = () => {
     });
     console.log(skills);
     console.log(errors);
-    console.log(values.nombre);
     if (
-      (values.nombre == "" || values.apellido == "" || values.linkedin == "") &&
+      (values.nameComplete == "" ||
+        values.apellido == "" ||
+        values.linkedin == "") &&
       errors[0] == undefined
     ) {
       alert("Todos los campos están vacíos");
@@ -73,7 +64,7 @@ const CrearPersona = () => {
     }
     if (empleado.nombre)
       setempleado({
-        nombre: values.nombre,
+        nameComplete: values.nameComplete,
         apellido: values.apellido,
         linkedin: values.linkedin,
       });
@@ -81,7 +72,7 @@ const CrearPersona = () => {
     contexto.empleados = [
       ...contexto.empleados,
       {
-        nombre: values.nombre,
+        nameComplete: values.nameComplete,
         apellido: values.apellido,
         linkedin: values.linkedin,
       },
@@ -101,18 +92,19 @@ const CrearPersona = () => {
     touched,
   } = useFormik({
     initialValues: {
-      nombre: "",
-      apellido: "",
+      nameComplete: "",
       rol: "",
-      seniority: "",
+      seniorityGeneral: "",
       linkedin: "",
-      fuenteContacto: "",
+      sources: "",
       recruiter: "",
       skill: [],
-      telefono: "",
-      mail: "",
-      industria: "",
-      remuneracion: "",
+      phoneNumber: "",
+      email: "",
+      industries: "",
+      remuneration: "",
+      dni: "",
+      cuil: "",
     },
     validationSchema: personaSchema,
     //onSubmit,
@@ -131,50 +123,26 @@ const CrearPersona = () => {
         <div className="flex h-1/2">
           {/*ARRIBA IZ*/}
           <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
-            <div className="flex justify-start items-center">
+            <div className="flex items-center">
               <div>
                 <FontAwesomeIcon className="mr-2" icon={faUser} />
               </div>
               <div>
                 <input
-                  id="nombre"
+                  id="nameComplete"
                   type="text"
-                  placeholder="Nombre"
+                  placeholder="Nombre completo"
                   className={
-                    errors.nombre && touched.nombre
+                    errors.nameComplete && touched.nameComplete
                       ? "border-b border-[#F40505]"
                       : "border-b border-[#D6E4EC]"
                   }
-                  value={values.nombre}
+                  value={values.nameComplete}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {errors.nombre && touched.nombre && (
-                  <p className="text-red-600 text-xs ">{errors.nombre}</p>
-                )}
-              </div>
-            </div>
-
-            <div className="flex justify-start items-center">
-              <div>
-                <FontAwesomeIcon className="mr-2" icon={faFileSignature} />
-              </div>
-              <div>
-                <input
-                  id="apellido"
-                  type="text"
-                  placeholder="Apellido"
-                  className={
-                    errors.apellido && touched.apellido
-                      ? "border-b border-[#F40505]"
-                      : "border-b border-[#D6E4EC]"
-                  }
-                  value={values.apellido}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.apellido && touched.apellido && (
-                  <p className="text-red-600 text-xs ">{errors.apellido}</p>
+                {errors.nameComplete && touched.nameComplete && (
+                  <p className="text-red-600 text-xs ">{errors.nameComplete}</p>
                 )}
               </div>
             </div>
@@ -183,7 +151,7 @@ const CrearPersona = () => {
           <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faLightbulb} />
-              <SelecRol />
+              <SelecRol value={values.rol} />
               {errors.selection && touched.selection && (
                 <p className="text-red-600 text-xs ">{errors.selection}</p>
               )}
@@ -191,7 +159,7 @@ const CrearPersona = () => {
 
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faMedal} />
-              <SelecSeniority />
+              <SelecSeniority value={values.seniorityGeneral} />
             </div>
           </div>
         </div>
@@ -224,7 +192,7 @@ const CrearPersona = () => {
             </div>
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faUserGroup} />
-              <SelecContact />
+              <Sources value={values.sources} />
             </div>
           </div>
           {/*ABAJO DER*/}
@@ -258,7 +226,10 @@ const CrearPersona = () => {
                 Skills
               </button>
               <Modal active={active} toggle={toggle}>
-                <SelecSkills onModalChange={onModalChange} />
+                <SelecSkills
+                  value={values.skill}
+                  onModalChange={onModalChange}
+                />
               </Modal>
             </div>
           </div>
@@ -275,20 +246,20 @@ const CrearPersona = () => {
               </div>
               <div>
                 <input
-                  id="telefono"
+                  id="phoneNumber"
                   type="text"
                   placeholder="Teléfono"
                   className={
-                    errors.telefono && touched.telefono
+                    errors.phoneNumber && touched.phoneNumber
                       ? "border-b border-[#F40505]"
                       : "border-b border-[#D6E4EC]"
                   }
-                  value={values.telefono}
+                  value={values.phoneNumber}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {errors.telefono && touched.telefono && (
-                  <p className="text-red-600 text-xs ">{errors.telefono}</p>
+                {errors.phoneNumber && touched.phoneNumber && (
+                  <p className="text-red-600 text-xs ">{errors.phoneNumber}</p>
                 )}
               </div>
             </div>
@@ -297,20 +268,20 @@ const CrearPersona = () => {
             </div>
             <div>
               <input
-                id="mail"
+                id="email"
                 type="text"
                 placeholder="Mail"
                 className={
-                  errors.mail && touched.mail
+                  errors.email && touched.email
                     ? "border-b border-[#F40505]"
                     : "border-b border-[#D6E4EC]"
                 }
-                value={values.mail}
+                value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.mail && touched.mail && (
-                <p className="text-red-600 text-xs ">{errors.mail}</p>
+              {errors.email && touched.email && (
+                <p className="text-red-600 text-xs ">{errors.email}</p>
               )}
             </div>
           </div>
@@ -322,20 +293,20 @@ const CrearPersona = () => {
               </div>
               <div>
                 <input
-                  id="industria"
+                  id="industries"
                   type="text"
                   placeholder="Industria"
                   className={
-                    errors.industria && touched.industria
+                    errors.industries && touched.industries
                       ? "border-b border-[#F40505]"
                       : "border-b border-[#D6E4EC]"
                   }
-                  value={values.industria}
+                  value={values.industries}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {errors.industria && touched.industria && (
-                  <p className="text-red-600 text-xs ">{errors.industria}</p>
+                {errors.industries && touched.industries && (
+                  <p className="text-red-600 text-xs ">{errors.industries}</p>
                 )}
               </div>
             </div>
@@ -344,26 +315,73 @@ const CrearPersona = () => {
             </div>
             <div>
               <input
-                id="remuneracion"
+                id="remuneration"
                 type="text"
                 placeholder="Remuneración"
                 className={
-                  errors.remuneracion && touched.remuneracion
+                  errors.remuneration && touched.remuneration
                     ? "border-b border-[#F40505]"
                     : "border-b border-[#D6E4EC]"
                 }
-                value={values.remuneracion}
+                value={values.remuneration}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.remuneracion && touched.remuneracion && (
-                <p className="text-red-600 text-xs ">{errors.remuneracion}</p>
+              {errors.remuneration && touched.remuneration && (
+                <p className="text-red-600 text-xs ">{errors.remuneration}</p>
               )}
             </div>
           </div>
         </div>
 
         {/* ---------*/}
+
+        <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
+          <div className="flex justify-start items-center">
+            <div>
+              <FontAwesomeIcon className="mr-2" icon={faIdCard} />
+            </div>
+            <div>
+              <input
+                id="dni"
+                type="text"
+                placeholder="Dni"
+                className={
+                  errors.dni && touched.dni
+                    ? "border-b border-[#F40505]"
+                    : "border-b border-[#D6E4EC]"
+                }
+                value={values.dni}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errors.dni && touched.dni && (
+                <p className="text-red-600 text-xs ">{errors.dni}</p>
+              )}
+            </div>
+          </div>
+          <div>
+          <FontAwesomeIcon className="mr-2" icon={faIdCard} />
+          </div>
+          <div>
+            <input
+              id="cuil"
+              type="text"
+              placeholder="Cuil"
+              className={
+                errors.cuil && touched.cuil
+                  ? "border-b border-[#F40505]"
+                  : "border-b border-[#D6E4EC]"
+              }
+              value={values.cuil}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.cuil && touched.cuil && (
+              <p className="text-red-600 text-xs ">{errors.cuil}</p>
+            )}
+          </div>
+        </div>
 
         <div className="flex flex-col justify-center items-center m-10">
           {/*

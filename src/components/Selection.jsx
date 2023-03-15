@@ -180,7 +180,7 @@ export function SelecSkills({onModalChange}){
 />)
 }
 
-export function SelecRol() {
+export function SelecRol({value}) {
   const [selectedSupplier, setSelectedSupplier] = useState();
 
   const handleSelectChange = ({ value }) => {
@@ -190,7 +190,7 @@ export function SelecRol() {
 
   return (
     <div>
-      <Select id= "rol" options={rol} onChange={handleSelectChange} placeholder="Rol" />
+      <Select id= "rol" value={value} options={rol} onChange={handleSelectChange} placeholder="Rol" />
     </div>
     
   );
@@ -208,7 +208,7 @@ export function SelecRolMulti() {
   />)
 }
 
-export function SelecSeniority() {
+export function SelecSeniority({value}) {
   const [selectedSupplier, setSelectedSupplier] = useState();
 
   const handleSelectChange = ({ value }) => {
@@ -219,6 +219,7 @@ export function SelecSeniority() {
   return (
     <div>
       <Select
+        value={value}
         options={senior}
         onChange={handleSelectChange}
         placeholder="Seniority"
@@ -240,7 +241,7 @@ export function SelecSeniorityMulti() {
   />)
 }
 
-export function SelecContact() {
+export function Sources({value}) {
   const [selectedSupplier, setSelectedSupplier] = useState();
 
   const handleSelectChange = ({ value }) => {
@@ -251,6 +252,7 @@ export function SelecContact() {
   return (
     <div>
       <Select
+        value={value}
         options={contacto}
         onChange={handleSelectChange}
         placeholder="Fuente"
