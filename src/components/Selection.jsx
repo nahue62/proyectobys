@@ -168,7 +168,7 @@ export function SelecSkills({ onModalChange }) {
       options={skills}
       className="basic-multi-select"
       classNamePrefix="select"
-      placeholder="Skills"
+      placeholder="Skills..."
     />
   );
 }
@@ -188,7 +188,7 @@ export function SelecRol({ handleRolChange }) {
         id="rol"
         options={rol}
         onChange={handleSelectChange}
-        placeholder="Rol"
+        placeholder="Rol actual"
       />
     </div>
   );
@@ -221,7 +221,7 @@ export function SelecSeniority({ handleSeniorityGeneralChange }) {
       <Select
         options={senior}
         onChange={handleSelectChange}
-        placeholder="Seniority"
+        placeholder="Seniority..."
       />
     </div>
   );
@@ -254,7 +254,7 @@ export function Sources({ handleSourcesChange }) {
       <Select
         options={contacto}
         onChange={handleSelectChange}
-        placeholder="Fuente"
+        placeholder="Fuente..."
       />
     </div>
   );

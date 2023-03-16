@@ -92,7 +92,6 @@ const CrearPersona = () => {
 
   //const contexto = useContext(Contexto);
 
-
   useEffect(() => {
     setPersona({
       nameComplete: values.nameComplete,
@@ -104,7 +103,35 @@ const CrearPersona = () => {
       recruiter: values.recruiter,
       // FALTAN ALGUNOS DATOS, ACTUALIZAR CUANDO BACK DEL OK
     });
-}, [banderaBoton])
+  }, [banderaBoton]);
+  /*
+  useEffect(() => {
+    setPersona({
+      nameComplete: values.nameComplete,
+      linkedin: values.linkedin,
+      skills: skills,
+      email: values.email,
+      phoneNumber: values.phoneNumber,
+      seniorityGeneral: seniorityGeneral,
+      recruiter: values.recruiter,
+      // FALTAN ALGUNOS DATOS, ACTUALIZAR CUANDO BACK DEL OK
+    });
+    console.log(persona);
+  }, [rol]);
+  useEffect(() => {
+    setPersona({
+      nameComplete: values.nameComplete,
+      linkedin: values.linkedin,
+      skills: skills,
+      email: values.email,
+      phoneNumber: values.phoneNumber,
+      seniorityGeneral: seniorityGeneral,
+      recruiter: values.recruiter,
+      // FALTAN ALGUNOS DATOS, ACTUALIZAR CUANDO BACK DEL OK
+    });
+    console.log(persona);
+  }, [sources]);
+*/
 
   const pruebaSubmit = (e) => {
     console.log(skills);
@@ -114,17 +141,10 @@ const CrearPersona = () => {
       errors.linkedin === undefined &&
       (values.nameComplete !== "" || values.linkedin !== "")
     ) {
-      /*
-       setPersona({
-        nameComplete : values.nameComplete,
-        linkedin: values.linkedin,
-       })
-       */
       console.log(persona);
-      alert("se envio al back");
       addPersons(persona);
     } else {
-      alert("todo mal");
+      alert("Los datos ingresados no son válidos.");
     }
   };
 
@@ -446,7 +466,18 @@ const CrearPersona = () => {
           */}
           <button
             onClick={() => {
-              setBanderaBoton(banderaBoton + 1 );
+              setPersona({
+                nameComplete: values.nameComplete,
+                linkedin: values.linkedin,
+                skills: skills,
+                email: values.email,
+                phoneNumber: values.phoneNumber,
+                seniorityGeneral: seniorityGeneral,
+                recruiter: values.recruiter,
+                // FALTAN ALGUNOS DATOS, ACTUALIZAR CUANDO BACK DEL OK
+              });
+              setBanderaBoton(banderaBoton + 1);
+
             }}
             type="submit"
             className="text-white bg-[#006DA4] hover:bg-[#1d6081] px-4 py-2 rounded my-2 cursor-pointer transition-colors"
