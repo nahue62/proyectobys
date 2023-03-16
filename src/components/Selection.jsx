@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Select from "react-select";
 
-
 export const rol = [
   { label: "Analista Tester Funcional", value: "Analista Tester Funcional" },
   { label: "Administrativo", value: "Administrativo" },
@@ -32,7 +31,6 @@ export const rol = [
   { label: "QA Agile", value: "QA Agile" },
   { label: "Diseñador Grafico", value: "Diseñador Grafico" },
 ];
-
 
 const skills = [
   { label: "Agile", value: "Agile" },
@@ -115,7 +113,6 @@ const skills = [
   { label: "React/NodeJS", value: "React/NodeJS" },
 ];
 
-
 const senior = [
   { label: "Trainee", value: "Trainee" },
   { label: "Jr", value: "Jr" },
@@ -124,8 +121,6 @@ const senior = [
   { label: "Ssr+", value: "Ssr+" },
   { label: "Sr", value: "Sr" },
 ];
-
-
 
 const contacto = [
   { label: "Mi Bucle", value: "Mi Bucle" },
@@ -141,9 +136,6 @@ const contacto = [
   { label: "Empujar", value: "Empujar" },
   { label: "Proveedor", value: "Proveedor" },
 ];
-
-
-
 
 /*
 export function SelecSkills() {
@@ -167,52 +159,60 @@ export function SelecSkills() {
 }
 */
 
-export function SelecSkills({onModalChange}){
+export function SelecSkills({ onModalChange }) {
   return (
-  <Select
-  onChange={onModalChange}
-  isMulti
-  name="skills"
-  options={skills}
-  className="basic-multi-select"
-  classNamePrefix="select"
-  placeholder="Skills"
-/>)
+    <Select
+      onChange={onModalChange}
+      isMulti
+      name="skills"
+      options={skills}
+      className="basic-multi-select"
+      classNamePrefix="select"
+      placeholder="Skills"
+    />
+  );
 }
 
-export function SelecRol() {
-  const [selectedSupplier, setSelectedSupplier] = useState();
+export function SelecRol({ handleRolChange }) {
+  //const [selectedSupplier, setSelectedSupplier] = useState();
 
   const handleSelectChange = ({ value }) => {
     console.log(value);
-    setSelectedSupplier(value);
+    handleRolChange(value);
+    //setSelectedSupplier(value);
   };
 
   return (
     <div>
-      <Select id= "rol" options={rol} onChange={handleSelectChange} placeholder="Rol" />
+      <Select
+        id="rol"
+        options={rol}
+        onChange={handleSelectChange}
+        placeholder="Rol"
+      />
     </div>
-    
   );
 }
 
 export function SelecRolMulti() {
   return (
     <Select
-    isMulti
-    name="Rol"
-    options={rol}
-    className="basic-multi-select"
-    classNamePrefix="select"
-    placeholder="Rol"
-  />)
+      isMulti
+      name="Rol"
+      options={rol}
+      className="basic-multi-select"
+      classNamePrefix="select"
+      placeholder="Rol"
+    />
+  );
 }
 
-export function SelecSeniority() {
+export function SelecSeniority({ handleSeniorityGeneralChange }) {
   const [selectedSupplier, setSelectedSupplier] = useState();
 
   const handleSelectChange = ({ value }) => {
     console.log(value);
+    handleSeniorityGeneralChange(value);
     setSelectedSupplier(value);
   };
 
@@ -227,25 +227,26 @@ export function SelecSeniority() {
   );
 }
 
-
 export function SelecSeniorityMulti() {
   return (
     <Select
-    isMulti
-    name="Seniority"
-    options={senior}
-    className="basic-multi-select"
-    classNamePrefix="select"
-    placeholder="Seniority"
-  />)
+      isMulti
+      name="Seniority"
+      options={senior}
+      className="basic-multi-select"
+      classNamePrefix="select"
+      placeholder="Seniority"
+    />
+  );
 }
 
-export function Sources() {
-  const [selectedSupplier, setSelectedSupplier] = useState();
+export function Sources({ handleSourcesChange }) {
+  //const [selectedSupplier, setSelectedSupplier] = useState();
 
   const handleSelectChange = ({ value }) => {
     console.log(value);
-    setSelectedSupplier(value);
+    handleSourcesChange(value);
+    //setSelectedSupplier(value);
   };
 
   return (

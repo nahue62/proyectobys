@@ -1,7 +1,6 @@
 import {
   faCircleCheck,
   faDollarSign,
-  faFileSignature,
   faGear,
   faIndustry,
   faLightbulb,
@@ -14,42 +13,21 @@ import {
   faAddressCard,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin, faMailchimp } from "@fortawesome/free-brands-svg-icons";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { NavLink } from "react-router-dom";
 import { SelecSkills, SelecRol, SelecSeniority, Sources } from "../Selection";
 import { useFormik } from "formik";
 import { personaSchema } from "../../schemas";
-import Contexto from "../../context/Contexto";
-import { useContext, useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../Modal";
 
 const CrearPersona = () => {
   const [active, setActive] = useState(false);
   const [skills, setSkills] = useState([]);
-
-  // MODAL
-  const toggle = () => {
-    setActive(!active);
-  };
-
-  const onModalChange = (e) => {
-    setSkills(e);
-  };
-
-
-  //Fect verbo POST guardar una persona
-  const addPersons =(data)=>{
-    const requesInit = {
-     method: 'POST',
-     headers: {'Content-Type': 'application/json'},
-     body: JSON.stringify(data)
-   }
-   fetch('http://localhost:8080/bs/person/create', requesInit)
-   .then(res => res.json())
- };
-
-
-  const contexto = useContext(Contexto);
+  const [seniorityGeneral, setSeniorityGeneral] = useState("");
+  const [rol, setRol] = useState("");
+  const [sources, setSources] = useState("");
+  const [banderaBoton, setBanderaBoton] = useState(0);
   const [persona, setPersona] = useState({
     nameComplete: "",
     rol: "",
@@ -58,26 +36,101 @@ const CrearPersona = () => {
     sources: "",
     recruiter: "",
     skills: [],
+    email: "",
+    industries: "",
+    remuneration: "",
   });
 
+  // MODAL
+  const toggle = () => {
+    setActive(!active);
+  };
+
+  const onModalChange = (e) => {
+    if (e != undefined) {
+      e.forEach((element) => {
+        setSkills([
+          ...skills,
+          {
+            id: "",
+            name: element.value,
+          },
+        ]);
+      });
+    }
+  };
+
+  const handleSeniorityGeneralChange = (seniority) => {
+    if (seniority != undefined) {
+      setSeniorityGeneral(seniority);
+    }
+  };
+
+  const handleRolChange = (rol) => {
+    if (rol != undefined) {
+      setRol(rol);
+    }
+  };
+
+  const handleSourcesChange = (sources) => {
+    if (sources != undefined) {
+      setSources(sources);
+    }
+  };
+
+  //Fect verbo POST guardar una persona
+  const addPersons = (data) => {
+    const requesInit = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    fetch("https://bysback.herokuapp.com/bs/person/create", requesInit).then(
+      (res) => res.json()
+    );
+  };
+
+  //const contexto = useContext(Contexto);
+
+
+  useEffect(() => {
+    setPersona({
+      nameComplete: values.nameComplete,
+      linkedin: values.linkedin,
+      skills: skills,
+      email: values.email,
+      phoneNumber: values.phoneNumber,
+      seniorityGeneral: seniorityGeneral,
+      recruiter: values.recruiter,
+      // FALTAN ALGUNOS DATOS, ACTUALIZAR CUANDO BACK DEL OK
+    });
+}, [banderaBoton])
+
   const pruebaSubmit = (e) => {
+    console.log(skills);
     e.preventDefault();
-    if (errors.nameComplete === undefined && errors.linkedin === undefined && (values.nameComplete !== "" || values.linkedin !== "") ){
+    if (
+      errors.nameComplete === undefined &&
+      errors.linkedin === undefined &&
+      (values.nameComplete !== "" || values.linkedin !== "")
+    ) {
+      /*
        setPersona({
         nameComplete : values.nameComplete,
         linkedin: values.linkedin,
        })
-   
+       */
+      console.log(persona);
+      alert("se envio al back");
+      addPersons(persona);
     } else {
-          alert("todo mal")
+      alert("todo mal");
     }
   };
 
   //llamo funcion y le paso una persona que ingresan en los input.
-   addPersons(persona);
- 
+  //addPersons(persona);
 
-  
   const {
     handleBlur,
     handleChange,
@@ -147,7 +200,7 @@ const CrearPersona = () => {
           <div className="flex flex-col md:flex md:flex-row justify-around items-center border w-1/2 p-10">
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faLightbulb} />
-              <SelecRol />
+              <SelecRol handleRolChange={handleRolChange} />
               {errors.selection && touched.selection && (
                 <p className="text-red-600 text-xs ">{errors.selection}</p>
               )}
@@ -155,7 +208,9 @@ const CrearPersona = () => {
 
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faMedal} />
-              <SelecSeniority />
+              <SelecSeniority
+                handleSeniorityGeneralChange={handleSeniorityGeneralChange}
+              />
             </div>
           </div>
         </div>
@@ -188,7 +243,7 @@ const CrearPersona = () => {
             </div>
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faUserGroup} />
-              <Sources />
+              <Sources handleSourcesChange={handleSourcesChange} />
             </div>
           </div>
           {/*ABAJO DER*/}
@@ -390,6 +445,9 @@ const CrearPersona = () => {
           />
           */}
           <button
+            onClick={() => {
+              setBanderaBoton(banderaBoton + 1 );
+            }}
             type="submit"
             className="text-white bg-[#006DA4] hover:bg-[#1d6081] px-4 py-2 rounded my-2 cursor-pointer transition-colors"
           >
