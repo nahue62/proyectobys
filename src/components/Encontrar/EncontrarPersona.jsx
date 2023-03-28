@@ -10,6 +10,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { NavLink } from "react-router-dom";
+
+import Modal from "../Modal";
+import {SelecSkills,SelecRolMulti,SelecSeniorityMulti,} from "../Selection";
+
+
+
 const EncontrarPersona = () => {
 
   return (
@@ -23,22 +29,14 @@ const EncontrarPersona = () => {
           <div className="flex justify-around items-center border w-1/2 ">
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faLightbulb} />
-              <input
-                type="text"
-                placeholder="Rol"
-                className="border-b border-black"
-              />
+              <SelecRolMulti />
             </div>
           </div>
           {/*ARRIBA DER*/}
           <div className="flex justify-around items-center border w-1/2 ">
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faMedal} />
-              <input
-                type="text"
-                placeholder="Seniority"
-                className="border-b border-black"
-              />
+              <SelecSeniorityMulti />
             </div>
           </div>
         </div>
@@ -50,8 +48,8 @@ const EncontrarPersona = () => {
               <FontAwesomeIcon className="mr-2" icon={faUser} />
               <input
                 type="text"
-                placeholder="Nombre y apellido"
-                className="border-b border-black"
+                placeholder="Nombre Completo"
+                className="border-b border-[#D6E4EC]"
               />
             </div>
           </div>
@@ -59,11 +57,7 @@ const EncontrarPersona = () => {
           <div className="flex justify-around items-center border w-1/2">
             <div className="flex justify-start items-center">
               <FontAwesomeIcon className="mr-2" icon={faGear} />
-              <input
-                type="text"
-                placeholder="Skills"
-                className="border-b border-black"
-              />
+              <SelecSkills />
             </div>
           </div>
         </div>
